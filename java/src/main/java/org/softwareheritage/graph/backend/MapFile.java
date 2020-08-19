@@ -55,6 +55,20 @@ public class MapFile {
     }
 
     /**
+     * Returns a specific line in the file.
+     *
+     * @param lineIndex line number in the file
+     * @return the line at the specified position
+     */
+    public byte[] readBytesAtLine(long lineIndex) {
+        byte[] buffer = new byte[lineLength];
+        long position = lineIndex * (long) lineLength;
+        bufferMap.position(position);
+        bufferMap.read(buffer, 0, lineLength);
+        return buffer;
+    }
+
+    /**
      * Closes the mmap()-ed file.
      */
     public void close() throws IOException {
